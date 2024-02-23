@@ -1,0 +1,15 @@
+version: '3.3'
+services:
+  pubsubmongo:
+    image: mongo:latest
+    container_name: "pubsubmongo-2"
+    ports:
+      - "27017:27017"
+  pubsubspringboot:
+    image: pubsubspringboot:6.0
+    container_name: "pubsubspringboot-2"
+    ports:
+      - "8080:8080"
+    links:
+      - pubsubmongo
+

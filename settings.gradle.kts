@@ -1,1 +1,1 @@
-rootProject.name = "message.interchange"
+rootProject.name = "message.interchanges"

@@ -13,7 +13,7 @@ java {
 
 tasks {
 	bootJar {
-		archiveFileName.set("pubsub-2.jar")
+		archiveFileName.set("message-interchange-v1.jar")
 	}
 }
 
@@ -33,6 +33,7 @@ dependencies {
 	implementation("org.apache.commons:commons-lang3:3.12.0")
 	implementation("net.minidev:json-smart:2.5.0")
 	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springdoc:springdoc-openapi-ui:1.7.0")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.projectlombok:lombok")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

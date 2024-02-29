@@ -7,9 +7,9 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import com.pubsub.message.interchange.domain.request.Topic;
-import com.pubsub.message.interchange.domain.request.Publisher;
-import com.pubsub.message.interchange.domain.request.Message;
+import com.pubsub.message.interchange.domain.request.TopicRequest;
+import com.pubsub.message.interchange.domain.request.PublisherRequest;
+import com.pubsub.message.interchange.domain.request.MessageRequest;
 
 @Data
 @AllArgsConstructor
@@ -20,14 +20,14 @@ public class TopicRegisterRequest {
     @Valid
     @NotNull
     @JsonProperty("topic")
-    private Topic topic;
+    private TopicRequest topic;
 
     @Valid
     @NotNull
     @JsonProperty("publisher")
-    private Publisher publisher;
+    private PublisherRequest publisher;
 
     @Valid
     @JsonProperty("message")
-    private Message message;
+    private MessageRequest message;
 }

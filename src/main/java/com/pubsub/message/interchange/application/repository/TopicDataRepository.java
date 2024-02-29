@@ -6,7 +6,5 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import java.util.Optional;
 
 public interface TopicDataRepository extends MongoRepository<TopicEntity, String> {
-
-    Optional<TopicEntity> findByTopicName(String topicName);
-
+    Optional<TopicEntity> findByTopicId(Long topicId);
 }

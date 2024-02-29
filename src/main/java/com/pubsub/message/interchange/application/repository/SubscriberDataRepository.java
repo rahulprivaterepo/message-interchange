@@ -8,6 +8,4 @@ import java.util.Optional;
 
 public interface SubscriberDataRepository extends MongoRepository<SubscriberEntity, String> {
 
-    Optional<SubscriberEntity> findBySubscriberId(Long topicId);
-
 }

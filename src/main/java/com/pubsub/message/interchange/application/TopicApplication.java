@@ -3,40 +3,45 @@ package com.pubsub.message.interchange.application;
 import com.pubsub.message.interchange.application.repository.MessageDataRepository;
 import com.pubsub.message.interchange.application.repository.SubscriberDataRepository;
 import com.pubsub.message.interchange.application.repository.TopicDataRepository;
+import com.pubsub.message.interchange.domain.entity.MessageEntity;
 import com.pubsub.message.interchange.domain.entity.SubscriberEntity;
 import com.pubsub.message.interchange.domain.entity.TopicEntity;
-import com.pubsub.message.interchange.domain.entity.*;
 import com.pubsub.message.interchange.domain.request.MessageRequest;
 import com.pubsub.message.interchange.domain.request.PublisherRequest;
 import com.pubsub.message.interchange.domain.request.SubscriberRequest;
 import com.pubsub.message.interchange.domain.request.TopicRequest;
+import com.pubsub.message.interchange.exception.MessageDoesNotExistsException;
+import com.pubsub.message.interchange.exception.NoNewMessageInTheTopicException;
 import com.pubsub.message.interchange.exception.SubscriberAlreadySignedUpException;
+import com.pubsub.message.interchange.exception.SubscriberNotLinkedToTopicException;
 import com.pubsub.message.interchange.exception.TopicAlreadyRegisteredException;
 import com.pubsub.message.interchange.exception.TopicDoesNotExistException;
 import com.pubsub.message.interchange.exception.TopicRegisterException;
 import com.pubsub.message.interchange.exception.TopicRetrievalException;
 import com.pubsub.message.interchange.exception.UnauthorizedToPublishException;
-import com.pubsub.message.interchange.exception.*;
-import com.pubsub.message.interchange.util.*;
+import com.pubsub.message.interchange.util.DateTimeUtil;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
-import java.time.*;
 
+import java.time.ZoneOffset;
+import java.time.ZonedDateTime;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
-import java.util.*;
 
+import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.MESSAGE_DOES_NOT_EXIST_EXCEPTION;
+import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.NO_NEW_MESSAGE_IN_THE_TOPIC_EXCEPTION;
 import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.SUBSCRIBER_ALREADY_REGISTERED_TO_THE_TOPIC_EXCEPTION;
+import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.SUBSCRIBER_NOT_LINKED_TO_TOPIC_EXCEPTION;
 import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.TOPIC_ALREADY_REGISTERED_EXCEPTION;
 import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.TOPIC_NOT_FOUND_EXCEPTION;
 import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.TOPIC_REGISTER_EXCEPTION;
 import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.TOPIC_RETRIEVAL_EXCEPTION;
 import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.UNAUTHORIZED_TO_PUBLISH_EXCEPTION;
-import static com.pubsub.message.interchange.constants.ExceptionMessageConstants.*;
 
 @Slf4j
 @AllArgsConstructor
